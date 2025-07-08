@@ -130,3 +130,152 @@ jobs:
           python-version: '3.x'
       - name: Run script
         run: python my_script.py
+
+ pypy-latest-310:
+    name: PyPy Latest for Python 3.10 (pypy3.10, pypy-3.10)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['pypy3.10', 'pypy-3.10']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run script
+        run: python my_script.py
+
+  pypy-latest-39:
+    name: PyPy Latest for Python 3.9 (pypy3.9, pypy-3.9)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['pypy3.9', 'pypy-3.9']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run script
+        run: python my_script.py
+
+  pypy-37-versions:
+    name: PyPy Specific for Python 3.7
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version:
+          - 'pypy3.7-v7.3.3'
+          - 'pypy-3.7-v7.3.3'
+          - 'pypy3.7-v7.x'
+          - 'pypy-3.7-v7.x'
+          - 'pypy3.7-v7.3.3rc1'
+          - 'pypy-3.7-v7.3.3rc1'
+          - 'pypy3.7-nightly'
+          - 'pypy-3.7-nightly'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run script
+        run: python my_script.py
+
+  # ----- Multiple versions in one job (all OS) -----
+  multiple-python-versions:
+    name: Multiple Python Versions (3.11, 3.12, 3.13)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: |
+            3.11
+            3.12
+            3.13
+      - name: Run script
+        run: python my_script.py
+
+  multiple-pypy-versions:
+    name: Multiple PyPy Versions
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: |
+            pypy-3.10-v7.3.x
+            pypy3.10-nightly
+            pypy3.9
+      - name: Run script
+        run: python my_script.py
+
+  multiple-python-pypy-versions:
+    name: Multiple Python & PyPy Versions
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: |
+            3.11
+            3.12
+            pypy3.10-nightly
+            pypy3.10
+            3.13
+      - name: Run script
+        run: python my_script.py
+
+  # ----- Matrix testing with Python and PyPy -----
+  matrix-python-pypy:
+    name: Matrix Python/PyPy (3.x, pypy3.8, pypy3.9)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.x', 'pypy3.8', 'pypy3.9']
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python/PyPy
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+      - run: python my_script.py
+
+  # ----- Matrix testing with exclude -----
+  matrix-exclude:
+    name: Matrix Exclude Python 3.9 on macOS/Windows
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ['3.9', '3.10', '3.11', 'pypy3.9']
+        exclude:
+          - os: macos-latest
+            python-version: '3.9'
+          - os: windows-latest
+            python-version: '3.9'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python/PyPy
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Display Python version
+        if: ${{ matrix.python-version != 'pypy3.9' }}
+        run: python --version
+      - name: Run script
+        run: python my_script.py
