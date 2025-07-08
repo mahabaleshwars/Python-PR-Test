@@ -131,7 +131,7 @@ jobs:
       - name: Run script
         run: python my_script.py
 
- pypy-latest-310:
+  pypy-latest-310:
     name: PyPy Latest for Python 3.10 (pypy3.10, pypy-3.10)
     runs-on: ${{ matrix.os }}
     strategy:
