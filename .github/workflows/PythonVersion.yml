@@ -1,13 +1,8 @@
 name: Python Version Scenarios
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - main
-      - develop
-      - 'release/*'
-
+  workflow_dispatch:
+  
 jobs:
   exact-patch-version:
     name: Exact Python Version (3.12.6)
