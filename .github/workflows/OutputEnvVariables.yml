@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-python@v5
         id: cp312
         with:
-          python-version: "3.9.0 - 3.12.0"
+          python-version: "3.9.0 - 3.13.0"
 
       - name: Show installed Python version
         run: echo "Installed Python version:${{ steps.cp312.outputs.python-version }}"
@@ -31,11 +31,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python 3.12
+      - name: Setup Python 3.13
         uses: actions/setup-python@v5
         id: cp312
         with:
-          python-version: "3.12"
+          python-version: "3.13"
 
       - name: Use python-path output with pipx
         run: pipx run --python '${{ steps.cp312.outputs.python-path }}' nox --version
@@ -58,11 +58,11 @@ jobs:
         if: runner.os != 'Windows'
         run: echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
-      - name: Setup Python 3.12 with Poetry cache
+      - name: Setup Python 3.13 with Poetry cache
         uses: actions/setup-python@v5
         id: cp312
         with:
-          python-version: "3.12"
+          python-version: "3.13"
           cache: "poetry"
 
       - name: Show if Poetry cache was hit
@@ -80,11 +80,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python 3.12
+      - name: Setup Python 3.13
         uses: actions/setup-python@v5
         id: cp312
         with:
-          python-version: "3.12"
+          python-version: "3.13"
 
       - name: Show Python environment variables
         run: |
@@ -102,11 +102,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python 3.12 without updating environment
+      - name: Setup Python 3.13 without updating environment
         uses: actions/setup-python@v5
         id: cp312
         with:
-          python-version: "3.12"
+          python-version: "3.13"
           update-environment: false
 
       - name: Run script with explicit python-path
