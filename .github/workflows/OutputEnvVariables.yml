@@ -61,7 +61,7 @@ jobs:
         run: echo "Poetry cache hit:${{ steps.cp312.outputs.cache-hit }}"
 
       - name: Install dependencies
-        run: poetry install
+        run: python -m poetry install
 
   env-vars:
     name: Test Environment Variables after setup-python
