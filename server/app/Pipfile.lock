@@ -1,0 +1,19 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "fakesha256-server"
+        },
+        "pipfile-spec": 6,
+        "requires": {},
+        "sources": [
+            {"name": "pypi", "url": "https://pypi.org/simple", "verify_ssl": true}
+        ]
+    },
+    "default": {
+        "flask": {
+            "version": "==3.0.0",
+            "hashes": ["sha256:fakehash-flask"]
+        }
+    },
+    "develop": {}
+}
