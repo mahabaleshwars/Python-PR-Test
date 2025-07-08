@@ -1,0 +1,55 @@
+name: Prelease and Pip Input
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check-latest:
+    name: "Check Latest Python Version - ${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python with check-latest true
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          check-latest: true
+      - name: Run script
+        run: python my_script.py
+
+  allow-prereleases:
+    name: "Allow Prereleases - ${{ matrix.os }} / ${{ matrix.python_version }}"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python_version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python with allow-prereleases
+        uses: actions/setup-python@v5
+        with:
+          python-version: "${{ matrix.python_version }}"
+          allow-prereleases: true
+      - name: Run nox for each Python version
+        run: pipx run nox --error-on-missing-interpreters -s tests-${{ matrix.python_version }}
+
+  pip-version:
+    name: "Pip Version Test - ${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python with specific pip version
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          pip-version: "25.0.1"
+      - name: Display pip version
+        run: pip --version
