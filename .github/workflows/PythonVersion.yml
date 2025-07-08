@@ -1,0 +1,137 @@
+name: Python Version Scenarios
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - develop
+      - 'release/*'
+
+jobs:
+  exact-patch-version:
+    name: Exact Python Version (3.12.6)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.6'
+      - name: Run script
+        run: python my_script.py
+
+  minor-version-latest-patch:
+    name: Minor Version, Latest Patch (3.13)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run script
+        run: python my_script.py
+
+  prerelease-tag:
+    name: Pre-release Python Version (3.14.0-alpha.1)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14.0-alpha.1'
+      - name: Run script
+        run: python my_script.py
+
+  dev-syntax:
+    name: Dev Syntax (3.14-dev)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14-dev'
+      - name: Run script
+        run: python my_script.py
+
+  free-threaded-t-suffix:
+    name: Free Threaded Python (3.13t)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13t'
+      - name: Run script
+        run: python my_script.py
+
+  free-threaded-input:
+    name: Free Threaded Python (>=3.13, freethreaded: true)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '>=3.13'
+          freethreaded: true
+      - name: Run script
+        run: python my_script.py
+
+  semver-range:
+    name: Semver Range (>=3.9 <3.14)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '>=3.9 <3.14'
+      - name: Run script
+        run: python my_script.py
+
+  hyphen-range:
+    name: Hyphen Range (3.13.0-alpha - 3.13.0)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.0-alpha - 3.13.0'
+      - name: Run script
+        run: python my_script.py
+
+  x-range:
+    name: X-Range (3.x)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Run script
+        run: python my_script.py
