@@ -8,6 +8,7 @@ jobs:
     name: Setup Python from version file (${{ matrix.versionfile }}) on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+    fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         versionfile: 
