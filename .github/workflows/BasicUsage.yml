@@ -16,6 +16,9 @@ jobs:
           - 'pypy3.10'
           - 'graalpy-24.0'
           - '3.13t' # Free-threaded Python
+        exclude:
+          - os: windows-latest
+            python-version: 'graalpy-24.0'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
