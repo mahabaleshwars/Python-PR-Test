@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: "3.9.0 - 3.12.0"
       - name: Show installed Python version
-        run: echo "Installed Python version: ${{ steps.cp312.outputs.python-version }}"
+        run: echo "Installed Python version:${{ steps.cp312.outputs.python-version }}"
 
   python-path-output:
     name: Test python-path output
@@ -58,7 +58,7 @@ jobs:
           pip install poetry
 
       - name: Show if Poetry cache was hit
-        run: echo "Poetry cache hit: ${{ steps.cp312.outputs.cache-hit }}"
+        run: echo "Poetry cache hit:${{ steps.cp312.outputs.cache-hit }}"
 
       - name: Install dependencies
         run: poetry install
