@@ -14,7 +14,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: '3.12.6'
       - name: Run script
@@ -28,7 +28,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: '3.13'
       - name: Run script
@@ -42,7 +42,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: '3.14.0-alpha.1'
       - name: Run script
@@ -56,7 +56,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: '3.14-dev'
       - name: Run script
@@ -70,7 +70,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: '3.13t'
       - name: Run script
@@ -84,7 +84,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: '3.13'
           freethreaded: true
@@ -99,7 +99,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: '>=3.9 <3.14'
       - name: Run script
@@ -113,7 +113,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: '3.13.0-alpha - 3.13.0'
       - name: Run script
@@ -127,7 +127,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: '3.x'
       - name: Run script
@@ -142,7 +142,7 @@ jobs:
         python-version: ['pypy3.10', 'pypy-3.10']
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: ${{ matrix.python-version }}
       - name: Run script
@@ -157,7 +157,7 @@ jobs:
         python-version: ['pypy3.9', 'pypy-3.9']
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: ${{ matrix.python-version }}
       - name: Run script
@@ -174,7 +174,7 @@ jobs:
           - 'pypy3.10-v7.3.17'
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: ${{ matrix.python-version }}
       - name: Run script
@@ -189,7 +189,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: |
             3.11
@@ -206,7 +206,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: |
             pypy-3.10-v7.3.x
@@ -223,7 +223,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: |
             3.11
@@ -244,7 +244,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python/PyPy
-        uses: actions/setup-python@v5
+        uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
@@ -267,7 +267,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python/PyPy
-        uses: actions/setup-python@v5
+        uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: ${{ matrix.python-version }}
       - name: Display Python version

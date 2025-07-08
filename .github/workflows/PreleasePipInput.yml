@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup Python with check-latest true
-        uses: actions/setup-python@v5
+        uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: "3.13"
           check-latest: true
@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup Python with allow-prereleases
-        uses: actions/setup-python@v5
+        uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: "${{ matrix.python_version }}"
           allow-prereleases: true
@@ -49,7 +49,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python with specific pip version
-        uses: actions/setup-python@v5
+        uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
         with:
           python-version: "3.13"
           pip-version: "25.0.1"
