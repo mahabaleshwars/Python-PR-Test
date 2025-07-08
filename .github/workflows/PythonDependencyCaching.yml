@@ -1,9 +1,8 @@
 name: Python Dependency Caching Scenarios
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-
+  workflow_dispatch:
+  
 jobs:
   pipenv-cache:
     name: Cache pipenv dependencies (${{ matrix.os }})
