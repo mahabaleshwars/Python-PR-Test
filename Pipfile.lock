@@ -1,0 +1,19 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "fakesha256"
+        },
+        "pipfile-spec": 6,
+        "requires": {},
+        "sources": [
+            {"name": "pypi", "url": "https://pypi.org/simple", "verify_ssl": true}
+        ]
+    },
+    "default": {
+        "requests": {
+            "version": "==2.31.0",
+            "hashes": ["sha256:fakehash"]
+        }
+    },
+    "develop": {}
+}
