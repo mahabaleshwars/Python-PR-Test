@@ -1,0 +1,23 @@
+name: Python Version File Scenarios
+
+on:
+  workflow_dispatch:
+
+jobs:
+  python-version-file-matrix:
+    name: Setup Python from version file (${{ matrix.versionfile }}) on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        versionfile: 
+          - '.python-version'
+          - 'pyproject.toml'
+          - '.tool-versions'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: ${{ matrix.versionfile }}
+      - name: Run script
+        run: python my_script.py
