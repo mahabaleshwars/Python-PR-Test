@@ -1,6 +1,8 @@
 name: Prelease and Pip Input
 
 on:
+  push:
+  pull_request:
   workflow_dispatch:
 
 jobs:

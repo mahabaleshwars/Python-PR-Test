@@ -1,6 +1,8 @@
 name: Python Dependency Caching Scenarios
 
 on:
+  push:
+  pull_request:
   workflow_dispatch:
   
 jobs:
