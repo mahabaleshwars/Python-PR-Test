@@ -8,5 +8,5 @@ authors = ["Your Name <you@example.com>"]
 python = "^3.13"
 requests = "^2.31.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^7.4.0"
