@@ -1,0 +1,91 @@
+name: Outputs and environment variables Tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  python-version-output:
+    name: Test python-version output
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python with version range
+        uses: actions/setup-python@v5
+        id: cp312
+        with:
+          python-version: "3.9.0 - 3.12.0"
+      - name: Show installed Python version
+        run: echo "Installed Python version:${{steps.cp312.outputs.python-version}}"
+
+  python-path-output:
+    name: Test python-path output
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python 3.13
+        uses: actions/setup-python@v5
+        id: cp313
+        with:
+          python-version: "3.13"
+      - name: Use python-path output with pipx
+        run: pipx run --python '${{ steps.cp313.outputs.python-path }}' nox --version
+
+  cache-hit-output:
+    name: Test cache-hit output with poetry
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python 3.13 with Poetry cache
+        uses: actions/setup-python@v5
+        id: cp313
+        with:
+          python-version: "3.13.0"
+          cache: "poetry"
+      - name: Show if Poetry cache was hit
+        run: echo "Poetry cache hit:${{ steps.cp313.outputs.cache-hit }}"
+
+  env-vars:
+    name: Test Environment Variables after setup-python
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python 3.13
+        uses: actions/setup-python@v5
+        id: cp313
+        with:
+          python-version: "3.13"
+      - name: Show Python environment variables
+        run: |
+          echo "pythonLocation=$pythonLocation"
+          echo "Python_ROOT_DIR=$Python_ROOT_DIR"
+          echo "Python2_ROOT_DIR=$Python2_ROOT_DIR"
+          echo "Python3_ROOT_DIR=$Python3_ROOT_DIR"
+
+  update-environment-flag:
+    name: Test update-environment=false
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python 3.13 without updating environment
+        uses: actions/setup-python@v5
+        id: cp313
+        with:
+          python-version: "3.13"
+          update-environment: false
+      - name: Run script with explicit python-path
+        run: ${{ steps.cp313.outputs.python-path }} my_script.py
