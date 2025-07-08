@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: "3.9.0 - 3.12.0"
       - name: Show installed Python version
-        run: echo "Installed Python version:${{steps.cp312.outputs.python-version}}"
+        run: echo "Installed Python version: ${{ steps.cp312.outputs.python-version }}"
 
   python-path-output:
     name: Test python-path output
@@ -28,13 +28,13 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Python 3.13
+      - name: Setup Python 3.12
         uses: actions/setup-python@v5
-        id: cp313
+        id: cp312
         with:
-          python-version: "3.13"
+          python-version: "3.12"
       - name: Use python-path output with pipx
-        run: pipx run --python '${{ steps.cp313.outputs.python-path }}' nox --version
+        run: pipx run --python '${{ steps.cp312.outputs.python-path }}' nox --version
 
   cache-hit-output:
     name: Test cache-hit output with poetry
@@ -44,14 +44,24 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Python 3.13 with Poetry cache
+
+      - name: Setup Python 3.12 with Poetry cache
         uses: actions/setup-python@v5
-        id: cp313
+        id: cp312
         with:
-          python-version: "3.13.0"
+          python-version: "3.12"
           cache: "poetry"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: latest
+
       - name: Show if Poetry cache was hit
-        run: echo "Poetry cache hit:${{ steps.cp313.outputs.cache-hit }}"
+        run: echo "Poetry cache hit: ${{ steps.cp312.outputs.cache-hit }}"
+
+      - name: Install dependencies
+        run: poetry install
 
   env-vars:
     name: Test Environment Variables after setup-python
@@ -61,11 +71,11 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Python 3.13
+      - name: Setup Python 3.12
         uses: actions/setup-python@v5
-        id: cp313
+        id: cp312
         with:
-          python-version: "3.13"
+          python-version: "3.12"
       - name: Show Python environment variables
         run: |
           echo "pythonLocation=$pythonLocation"
@@ -81,11 +91,11 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Python 3.13 without updating environment
+      - name: Setup Python 3.12 without updating environment
         uses: actions/setup-python@v5
-        id: cp313
+        id: cp312
         with:
-          python-version: "3.13"
+          python-version: "3.12"
           update-environment: false
       - name: Run script with explicit python-path
-        run: ${{ steps.cp313.outputs.python-path }} my_script.py
+        run: ${{ steps.cp312.outputs.python-path }} my_script.py
