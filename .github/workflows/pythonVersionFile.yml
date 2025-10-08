@@ -19,7 +19,7 @@ jobs:
           - '.tool-versions'
     steps:
       - uses: actions/checkout@v4
-      - uses: aradkdj/setup-python@feature/add-version-parsing-from-Pipfile
+      - uses: timfel/setup-python@tim/graalpy-windows-ea
         with:
           python-version-file: ${{ matrix.versionfile }}
       - name: Run script
