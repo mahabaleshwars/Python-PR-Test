@@ -1,5 +1,4 @@
-name: Python Version File Scenarios
-
+name: Python Version File Scenarios 
 on:
   push:
   pull_request:
@@ -22,5 +21,12 @@ jobs:
       - uses: timfel/setup-python@tim/graalpy-windows-ea
         with:
           python-version-file: ${{ matrix.versionfile }}
+          # Allow pre-releases if your version file specifies unreleased versions
+          allow-prereleases: true
+          # Optionally check the latest available version
+          check-latest: false
+        continue-on-error: false
+      - name: Verify Python installation
+        run: python --version
       - name: Run script
         run: python my_script.py
