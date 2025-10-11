@@ -5,7 +5,7 @@ description = "A sample project for testing poetry caching."
 authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.13"
+python = "^3.13.0"
 requests = "^2.31.0"
 
 [tool.poetry.group.dev.dependencies]
