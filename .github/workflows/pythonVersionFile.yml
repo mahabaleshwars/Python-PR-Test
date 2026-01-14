@@ -18,7 +18,7 @@ jobs:
           - '.tool-versions'
     steps:
       - uses: actions/checkout@v4
-      - uses: timfel/setup-python@tim/graalpy-windows-ea
+      - uses: mahabaleshwars/setup-python@test/toolkit-pr
         with:
           python-version-file: ${{ matrix.versionfile }}
           # Allow pre-releases if your version file specifies unreleased versions
